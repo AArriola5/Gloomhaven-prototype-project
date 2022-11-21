@@ -1,5 +1,7 @@
 package gloomhavenPrototype;
 
+//Need to add more variables, such as if the item is a weapon or not.
+//Want Player to be able to purchase items from a merchant or pick up on the map.
 public class Items {
 	String itemName, itemDescription;
 	

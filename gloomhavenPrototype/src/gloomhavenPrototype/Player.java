@@ -11,6 +11,7 @@ public class Player {
 	int mapPosX = 2; //Position of player for hex grid.
 	int mapPosY = 5;
 	
+	//Constructor to build a player, could add more variables later. Just the name for now.
 	public Player(String name) {
 		this.name = name;
 	}
@@ -46,13 +47,15 @@ public class Player {
 		this.mapPosY = newMapPosY;
 	}
 	
+	//Method to print out user's inventory, not yet implemented
 	public void showInventory() {
 		for (int i = 0; i < inventorySize; i++) {
 			System.out.println(inventory[i].toString());
 		}
 	}
+	//Method to move the player around the map, Need to implement whether the tile is occupied by another enemy or player.
 	public void move(Gridmap currentMap[][]) {
-		boolean madeMove = false;
+		boolean madeMove = false; //Boolean to check whether the player made a move and get them out of the loop
 		Scanner moveCommand = new Scanner(System.in);
 		System.out.println("Current position: " + mapPosX + ", " + mapPosY);
 		System.out.println("Where do you want to move?" + '\n' + 
@@ -62,11 +65,11 @@ public class Player {
 				"4: Right" + '\n' +
 				"5: Down Left" + '\n' +
 				"6: Down Right");
-		int command = moveCommand.nextInt();
 		
 		while(!madeMove) {
+			int command = moveCommand.nextInt();
 			switch(command) {
-			case 1:
+			case 1: //Moves Player Up Left / The mapPosY % 2 is to check whether the tile is even or odd to properly change tiles.
 				if(mapPosY % 2 == 0 && mapPosX > 0 && mapPosY > 0) {
 					this.setMapPosX(mapPosX -1);
 					this.setMapPosY(mapPosY -1);
@@ -78,7 +81,7 @@ public class Player {
 				}
 				System.out.println("moved to position: " + mapPosX + ", " + mapPosY);
 				break;
-			case 2:
+			case 2: // Moves player Up Right
 				if(mapPosY % 2 == 0 && mapPosY > 0) {
 					this.setMapPosY(this.getMapPosY()-1);
 					madeMove = true;
@@ -90,21 +93,21 @@ public class Player {
 				}
 				System.out.println("moved to position: " + mapPosX + ", " + mapPosY);
 				break;
-			case 3:
+			case 3: //Moves Player Left / Doesn't need even or odd check
 				if(mapPosX > 0) {
 					this.setMapPosX(this.getMapPosX()-1);
 					madeMove = true;
 				}
 				System.out.println("moved to position: " + mapPosX + ", " + mapPosY);
 				break;
-			case 4:
+			case 4: //Moves Player Right
 				if(mapPosX < currentMap.length-1) {
 					this.setMapPosX(this.getMapPosX()+1);
 					madeMove = true;
 				}
 				System.out.println("moved to position: " + mapPosX + ", " + mapPosY);
 				break;
-			case 5:
+			case 5: //Moves Player Down Left
 				if(mapPosY % 2 == 0 && mapPosX > 0 && mapPosY < currentMap[0].length-1) {
 					this.setMapPosX(this.getMapPosX()-1);
 					this.setMapPosY(this.getMapPosY()+1);
@@ -116,7 +119,7 @@ public class Player {
 				}
 				System.out.println("moved to position: " + mapPosX + ", " + mapPosY);
 				break;
-			case '6':
+			case '6': //Moves Player Down Right
 				if(mapPosY % 2 == 0 && mapPosY < currentMap[0].length-1) {
 					this.setMapPosY(this.getMapPosY()+1);
 					madeMove = true;
