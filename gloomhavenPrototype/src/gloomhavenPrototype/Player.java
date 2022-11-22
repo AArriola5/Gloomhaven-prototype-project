@@ -11,7 +11,7 @@ public class Player {
 	int mapPosX = 2; //Position of player for hex grid.
 	int mapPosY = 5;
 	
-	//Constructor to build a player, could add more variables later. Just the name for now.
+	//Constructor to build a player, could add more variables later. Just the name for now
 	public Player(String name) {
 		this.name = name;
 	}
