@@ -18,17 +18,16 @@ enum ItemEquipType {
 }
 
 interface OnUseCallBack {
-    void call(Player player);
+    void call(Items item,Player player);
 }
 
 public class Items {
-
 	String itemName, itemDescription;
 	int itemPrice, itemLevel;
 	ItemUseType useType;
 	ItemEquipType equipType;
 	OnUseCallBack itemOnUse; //lambda for when the player uses the item
-
+	int itemUseCount = 0;
 	//Constructor for creating an item
 	public Items (String name, String desc, int price, int level, ItemUseType use, ItemEquipType equip, OnUseCallBack callback){
 		itemName = name;
@@ -36,10 +35,10 @@ public class Items {
 		itemPrice = price;
 		useType = use;
 		itemLevel = level;
-		itemOnUse = callback;
 		equipType = equip;
+		itemOnUse = callback;
 	}
-	
+
 	public String getItemName() {
 		return itemName;
 	}
@@ -70,10 +69,12 @@ public class Items {
 		itemLevel = level;
 	}
 	
+	public void onUse(OnUseCallBack e) {
+		itemOnUse = e;
+	}
 	//Function calls the objects lambda expression itemOnUse & passes the Player who used it as paramater.
 	public void Use(Player player) {
-		itemOnUse.call(player);
-
+		itemOnUse.call(this, player);
 	}
 	
 	@Override
