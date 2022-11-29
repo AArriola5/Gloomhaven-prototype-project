@@ -32,8 +32,8 @@ public class Cards {
         return moveValue;
     }
 
-    void displayCard() {
-        System.out.printf("\n[Card Details]\nTitle: %s\nDescription: %s\nMoves: %d\nAttack: %d\n",
+    public void displayCard() {
+        System.out.printf("[Card Details]\nTitle: %s\nDescription: %s\nMoves: %d\nAttack: %d\n",
         cardTitle, cardDescription, moveValue, attackValue);
     }
 }
