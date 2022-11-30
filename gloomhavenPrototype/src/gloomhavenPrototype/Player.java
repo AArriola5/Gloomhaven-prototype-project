@@ -6,7 +6,7 @@ public class Player {
 	String name = "";
 	int level = 1;
 	int health = 10;
-	int gold = 0;
+	int gold = 30;
 	int inventorySize = 5;
 	Items[] inventory = new Items[inventorySize];
 	int mapPosX = 2; //Position of player for hex grid.
@@ -50,6 +50,7 @@ public class Player {
 	public void setMapPosY(int newMapPosY) {
 		this.mapPosY = newMapPosY;
 	}
+
 	public void addGold(int amt) {
 		if (amt <= 0) { return; }
 		this.gold = this.gold + amt;
@@ -58,6 +59,7 @@ public class Player {
 		if (amt <= 0) { return; }
 		this.gold = this.gold - amt;
 	}
+	//Finds the first empty index and adds item to it
 	public void addToInventory(Items toAdd) {
 		for (int i = 0; i < inventory.length; i++) {
 			if (inventory[i] == null) {
@@ -66,6 +68,7 @@ public class Player {
 			}
 		}
 	}
+	//Remove item from inventory
 	public void removeFromInventory(Items toRemove, int index) {
 		inventory[index] = null;
 	}
