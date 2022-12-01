@@ -31,7 +31,6 @@ public class Enemy{
 	public int getMapPosY() {
 		return this.mapPosY;
 	}
-
 	public void setEMapPosX(int newMapPosX) {
 		this.mapPosX = newMapPosX;
 	}
