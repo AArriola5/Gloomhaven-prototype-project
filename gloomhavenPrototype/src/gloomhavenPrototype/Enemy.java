@@ -3,10 +3,14 @@ package gloomhavenPrototype;
 
 public class Enemy{
     String name = "";
-    int level = 1;
-    int health = 9;
+    int level;
+    int health;
+    int movement;
+    int shield;
     int mapPosX = 2;
     int mapPosY = 0;
+    int attack;
+    int range;
 
     public Enemy(String name) {
 		this.name = name;
