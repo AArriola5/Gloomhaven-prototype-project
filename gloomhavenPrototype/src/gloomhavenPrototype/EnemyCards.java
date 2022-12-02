@@ -1,3 +1,5 @@
+package gloomhavenPrototype;
+
 public class EnemyCards {
 	private int attack;
 	private int range;
@@ -15,8 +17,8 @@ public class EnemyCards {
 		this.movement = movement;
 		this.shield = shield;
 		this.heal = heal;
-        this.mapPosX;
-        this.mapPosY;
+        this.mapPosX = mapPosX;
+        this.mapPosY = mapPosY;
     }    
 	public int getAttack() {
 		return attack;
@@ -34,10 +36,10 @@ public class EnemyCards {
 		return heal;
 	}
 	public int getmapPosX() {
-		return range;
+		return mapPosX;
 	}
     public int getmapPosY() {
-		return range;
+		return mapPosY;
     }   
 	public int getRange() {
 		return range;
