@@ -38,7 +38,7 @@ public final class Market {
 	}
 	
 	public static void Sell(Player player, Items toSell, int index) {
-		player.removeFromInventory(toSell,index);
+		player.removeFromInventory(toSell);
 		player.addGold(toSell.getPrice() / 2);
 		addItem(toSell);
 	}
@@ -65,7 +65,9 @@ public final class Market {
 			//Called then item is used. 'player' is the one who used the item
 			(Items thisItem, Player player) -> {
 				player.setHealth(player.getHealth() + 3);
-		    }
+		    },
+			//Called when the Item is unused/sold/consumed
+			(Items thisItem, Player player) -> {}
 		));
 		
 		addItem(new Items(
@@ -87,6 +89,10 @@ public final class Market {
 					if (dmgInfo == null) { return; }
 					player.setHealth(player.getHealth() + 3);
 			    });
+			},
+			//Called when the Item is unused/sold/consumed
+			(Items thisItem, Player player) -> {
+				Events.Remove("OnPlayerDamage", "HeaterShieldDamage");
 			}
 		));
 		
