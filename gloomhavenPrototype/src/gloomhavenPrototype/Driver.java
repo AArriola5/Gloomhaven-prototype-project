@@ -11,7 +11,7 @@ public class Driver {
 		int mapX = 6;
 		int mapY = 6;
 		Gridmap testMap[][] = new Gridmap[6][6];
-		
+		Market.Init(); //Initialize the Market
 		//sets the map with default parameters, in this case so far just false occupation.
 		//There might be a better way of implementing this, but not sure.
 		for(int i = 0; i < mapX; i++) {
