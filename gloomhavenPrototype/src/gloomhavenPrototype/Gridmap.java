@@ -4,4 +4,14 @@ package gloomhavenPrototype;
 //Could add type of tile eventually
 public class Gridmap {
 	boolean occupied = false;
+	
+	public Gridmap() {
+		this.occupied = false;
+	}
+	public void setOccupied(boolean newOccupied) {
+		this.occupied = newOccupied;
+	}
+	public boolean getOccupied() {
+		return this.occupied;
+	}
 }
