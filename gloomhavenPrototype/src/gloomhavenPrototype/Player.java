@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Player {
+public class Player extends Entity{
 	String name = "";
 	int level = 1;
 	int health = 10;
