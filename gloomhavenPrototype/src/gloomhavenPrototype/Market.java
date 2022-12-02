@@ -7,17 +7,19 @@ import java.util.HashMap;
 public final class Market {
 	private static HashMap<String, Items> MarketData = new HashMap<>();
 	public static ArrayList<Items>[] levels =  (ArrayList<Items>[]) new ArrayList[4]; //array of lists for each item level
-	
+	private static boolean initStarted = false;
 	//Initialization function called when a game starts
 	public static void Init() {
+		if (initStarted) { return; }
 	    for (int i = 0; i < 4; i++) {
 	    	levels[i] = new ArrayList<Items>();
 	    }
 		MarketManifest();
+		initStarted = true;
 	}
 	
 	//Helper function for adding an Item
-	private static void addItem(Items toAdd) {
+	public static void addItem(Items toAdd) {
 		MarketData.put(toAdd.getItemName(), toAdd);
 		levels[toAdd.getItemLevel() - 1].add(toAdd);
 	}
@@ -38,7 +40,7 @@ public final class Market {
 		removeItem(toBuy);
 	}
 	
-	public static void Sell(Player player, Items toSell, int index) {
+	public static void Sell(Player player, Items toSell) {
 		player.removeFromInventory(toSell);
 		player.addGold(toSell.getPrice() / 2);
 		addItem(toSell);
