@@ -21,7 +21,7 @@ interface OnUseCallBack {
     void call(Items item,Player player);
 }
 
-public class Items {
+public class Items implements Comparable<Items>{
 	String itemName, itemDescription;
 	int itemPrice, itemLevel;
 	ItemUseType useType;
@@ -94,5 +94,13 @@ public class Items {
 	@Override
 	public String toString() {
 		return itemName + ": " + itemDescription;
+	}
+	
+	@Override
+	public int compareTo(Items otherItem) {
+		if (this.itemName == otherItem.getItemName() && this.itemDescription == otherItem.getItemDescription()) {
+			return 0;
+		}
+	  return 1;
 	}
 }
