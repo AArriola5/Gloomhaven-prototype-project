@@ -1,5 +1,7 @@
 package gloomhavenPrototype;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Player {
@@ -9,6 +11,8 @@ public class Player {
 	int gold = 30;
 	int inventorySize = 5;
 	Items[] inventory = new Items[inventorySize];
+	HashMap<ItemEquipType, ArrayList<Items>> Equipment = new HashMap<ItemEquipType, ArrayList<Items>>();
+
 	int mapPosX = 2; //Position of player for hex grid.
 	int mapPosY = 5;
 	
@@ -69,8 +73,13 @@ public class Player {
 		}
 	}
 	//Remove item from inventory
-	public void removeFromInventory(Items toRemove, int index) {
-		inventory[index] = null;
+	public void removeFromInventory(Items toRemove) {
+		for (int i = 0; i < inventory.length; i++) {
+			if (inventory[i].getItemName() == toRemove.getItemName()) {
+				inventory[i] = null;
+				return;
+			}
+		}
 	}
 	//Method to print out user's inventory, not yet implemented
 	public void showInventory() {
@@ -78,6 +87,38 @@ public class Player {
 			System.out.println(inventory[i].toString());
 		}
 	}
+	
+	//Equip an item onto player item must not be a SMALL item.
+	public void equipItem(Items toEquip) {
+		ItemEquipType itemType = toEquip.getItemEquipType();
+		if (itemType == ItemEquipType.SMALL) {return;}
+		
+		if (!Equipment.containsKey(itemType)) {
+			//You can't equip a Two handed weapon if you have a One handed weapon equipped already.
+			if (itemType == ItemEquipType.TWOHANDS && Equipment.containsKey(ItemEquipType.ONEHAND)){
+				return;
+			}
+			//You can't equip a One handed weapon if you have a Two handed weapon equipped already.
+			if (itemType == ItemEquipType.ONEHAND && Equipment.containsKey(ItemEquipType.TWOHANDS)){
+				return;
+			}
+			
+			if (Equipment.containsKey(itemType)){
+				Equipment.get(itemType).add(toEquip);
+			}
+			removeFromInventory(toEquip);
+			toEquip.Use(this);
+		}
+	}
+	//Unequip and item from player.
+	public void unequipItem(Items toUnequip) {
+		ItemEquipType itemType = toUnequip.getItemEquipType();
+		if (itemType == ItemEquipType.SMALL) {return;}
+		Equipment.get(itemType).remove(toUnequip);
+		addToInventory(toUnequip);
+		toUnequip.Unuse(this); //call any unuse functions
+	}
+
 	//Method to move the player around the map, Need to implement whether the tile is occupied by another enemy or player.
 	public void move(Gridmap currentMap[][]) {
 		boolean madeMove = false; //Boolean to check whether the player made a move and get them out of the loop
