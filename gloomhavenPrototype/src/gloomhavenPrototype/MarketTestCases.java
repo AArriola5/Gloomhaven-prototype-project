@@ -48,7 +48,7 @@ class MarketTestCases {
 		Items itemtoBuy = Market.getItemsForSale().get(0);
 		Market.Purchase(testPly, itemtoBuy);
 		
-		assertTrue(Market.getItemsForSale().contains(itemtoBuy));
+		assertFalse(Market.getItemsForSale().contains(itemtoBuy));
 	}
 	
 }
