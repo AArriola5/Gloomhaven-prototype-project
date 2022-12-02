@@ -21,22 +21,24 @@ interface OnUseCallBack {
     void call(Items item,Player player);
 }
 
-public class Items {
+public class Items implements Comparable<Items>{
 	String itemName, itemDescription;
 	int itemPrice, itemLevel;
 	ItemUseType useType;
 	ItemEquipType equipType;
 	OnUseCallBack itemOnUse; //lambda for when the player uses the item
+	OnUseCallBack itemOnUnuse; //lambda for when the player unuses the item. Unequips/sells/consumes it
 	int itemUseCount = 0;
 	//Constructor for creating an item
-	public Items (String name, String desc, int price, int level, ItemUseType use, ItemEquipType equip, OnUseCallBack callback){
+	public Items (String name, String desc, int price, int level, ItemUseType use, ItemEquipType equip, OnUseCallBack callback1, OnUseCallBack callback2){
 		itemName = name;
 		itemDescription = desc;
 		itemPrice = price;
 		useType = use;
 		itemLevel = level;
 		equipType = equip;
-		itemOnUse = callback;
+		itemOnUse = callback1;
+		itemOnUnuse = callback2;
 	}
 
 	public String getItemName() {
@@ -45,12 +47,18 @@ public class Items {
 	public String getItemDescription() {
 		return itemDescription;
 	}
+	public int getPrice() {
+		return itemPrice;
+	}
 
 	//Get the level of the item
 	public int getItemLevel() {
 		return itemLevel;
 	}
 
+	public ItemEquipType getItemEquipType() {
+		return equipType;
+	}
 	public void setItemName(String newName) {
 		itemName = newName;
 	}
@@ -72,13 +80,27 @@ public class Items {
 	public void onUse(OnUseCallBack e) {
 		itemOnUse = e;
 	}
+
+	public void onUnuse(OnUseCallBack e) {
+		itemOnUnuse = e;
+	}
 	//Function calls the objects lambda expression itemOnUse & passes the Player who used it as paramater.
 	public void Use(Player player) {
 		itemOnUse.call(this, player);
 	}
-	
+	public void Unuse(Player player) {
+		itemOnUnuse.call(this, player);
+	}
 	@Override
 	public String toString() {
 		return itemName + ": " + itemDescription;
+	}
+	
+	@Override
+	public int compareTo(Items otherItem) {
+		if (this.itemName == otherItem.getItemName() && this.itemDescription == otherItem.getItemDescription()) {
+			return 0;
+		}
+	  return 1;
 	}
 }
