@@ -3,7 +3,7 @@ package gloomhavenPrototype;
 
 public final class City {
 	private static int prosperityLevel = 1; //Posperity's max level is 4. This is for the sake of time.
-	private static int prosperityProg = 0;
+	private static int prosperityProg = 0; //Progress counter
 	private static int churchBank = 0; //Amount of money given to the church
 	
 	//Prosperity accessors
@@ -15,6 +15,10 @@ public final class City {
 	}
 	public static int getDonations() {
 		return churchBank;
+	}
+	//When the Player decides to rest
+	public static void rest(Player player) {
+		player.setHealth(10);
 	}
 	
 	//Helper function for giving a prosperity point to city
