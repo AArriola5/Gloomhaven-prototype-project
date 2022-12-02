@@ -6,12 +6,13 @@ import java.util.HashMap;
 
 public final class Market {
 	private static HashMap<String, Items> MarketData = new HashMap<>();
-	public static ArrayList<Items>[] levels = new ArrayList[4]; //array of lists for each item level
-
-	public Market() {
-        for (int i = 0; i < 4; i++) {
-        	levels[i] = new ArrayList<Items>();
-        }
+	public static ArrayList<Items>[] levels =  (ArrayList<Items>[]) new ArrayList[4]; //array of lists for each item level
+	
+	//Initialization function called when a game starts
+	public static void Init() {
+	    for (int i = 0; i < 4; i++) {
+	    	levels[i] = new ArrayList<Items>();
+	    }
 		MarketManifest();
 	}
 	
@@ -54,7 +55,7 @@ public final class Market {
 	}
 	
 	//Creates some items for the market.
-	public static void MarketManifest(){
+	private static void MarketManifest(){
 		addItem(new Items(
 			"Minor Healing Potion", //name
 			"During your turn you can heal 3 damage.", // description
