@@ -34,6 +34,7 @@ public class Driver {
 		//Menu list for which player is performing an action. 
 		for(int i = 0; i < players.size(); i++) {
 			System.out.println(players.get(i).getName() + "'s turn");
+			players.get(i).drawPhase(); // Player will draw cards before doing anything
 			
 			for(int j = 0; j < players.get(i).getTurns(); j++) {
 				System.out.println("What action would you like to perform?\n"
