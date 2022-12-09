@@ -69,7 +69,7 @@ public class Deck {
     1. Draw two cards
     2. Choose which cards to use for attack and move
     */
-    public void playerTurn() {
+    public void drawCards() {
         Scanner inputScanner = new Scanner(System.in);
 
         // 1. Draw two cards
