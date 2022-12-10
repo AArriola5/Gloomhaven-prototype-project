@@ -93,7 +93,7 @@ public class Items implements Comparable<Items>{
 	}
 	@Override
 	public String toString() {
-		return itemName + ": " + itemDescription;
+		return itemName + ": " + itemDescription + " Price: " + itemPrice + " GOLD";
 	}
 	
 	@Override
