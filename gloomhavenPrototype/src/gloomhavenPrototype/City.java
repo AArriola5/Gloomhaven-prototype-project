@@ -1,5 +1,6 @@
 package gloomhavenPrototype;
 
+import java.util.ArrayList;
 
 public final class City {
 	private static int prosperityLevel = 1; //Posperity's max level is 4. This is for the sake of time.
@@ -17,8 +18,10 @@ public final class City {
 		return churchBank;
 	}
 	//When the Player decides to rest
-	public static void rest(Player player) {
-		player.setHealth(Math.min(player.getHealth() + 2, 10));
+	public static void rest(ArrayList<Player> players) {
+		for (Player ply : players) {
+			ply.setHealth(Math.min(ply.getHealth() + 2, 10));
+		}
 	}
 	
 	//Helper function for giving a prosperity point to city
@@ -30,9 +33,27 @@ public final class City {
 		}
 	}
 	//Player will donate 50 gold to the church 
-	public static void donate(Player player) {
-		if (player.getGold() < 50 || prosperityLevel == 4) {return;}
-		player.takeGold(50);
+	public static boolean donate(ArrayList<Player> players) {
+		int sum = 0; //gets the sum of party's money
+		for(Player ply : players) {
+			sum += ply.getGold();
+		}
+		//check if the toal sum is less than 50 gold
+		if (sum < 50 || prosperityLevel == 4) {return false;}
+		int counter = 50;
+		//Take money from each player til they have 50 gold
+		for(Player ply : players) {
+			if (counter == 0) {break;}
+			int diff =(ply.getGold() - counter);
+			if (diff < 0) {
+				ply.takeGold(ply.getGold());
+				counter -= ply.getGold();	
+			}else {
+				ply.takeGold(ply.getGold() - diff);
+				counter -= ply.getGold() - diff;	
+			}
+		}
+		
 		churchBank = churchBank + 50;
 		
 		//Every 100 gold city gains a point
@@ -40,5 +61,6 @@ public final class City {
 			giveProsperity();
 			churchBank = churchBank - 100;
 		}
+		return true;
 	}
 }
