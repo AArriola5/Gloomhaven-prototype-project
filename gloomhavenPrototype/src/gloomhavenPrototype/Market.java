@@ -33,11 +33,12 @@ public final class Market {
 		}
 	}
 	
-	public static void Purchase(Player player, Items toBuy) {
+	public static boolean Purchase(Player player, Items toBuy) {
 		//Money validations.
-		if (player.getGold() < toBuy.getPrice()) { return; }
+		if (player.getGold() < toBuy.getPrice()) { return false; }
 		player.addToInventory(toBuy);
 		removeItem(toBuy);
+		return true;
 	}
 	
 	public static void Sell(Player player, Items toSell) {
