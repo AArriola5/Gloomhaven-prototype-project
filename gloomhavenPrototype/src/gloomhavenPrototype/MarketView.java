@@ -34,7 +34,10 @@ public class MarketView {
 	public static void printMarketSellChoices(Items inv[], int invSize) {
 		System.out.println("Select an Item to sell (based on number)?");
 		for (int i = 0; i < invSize; i++) {
-			System.out.println(i + ": " + inv[i].toString());
+			System.out.println(i + ": " );
+			if (inv[i] != null) {
+				System.out.print(inv[i].toString() + "\n");
+			}
 		}
 	}
 
